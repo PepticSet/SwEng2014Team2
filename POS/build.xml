@@ -2,13 +2,19 @@
 
 <project name ="POS" default="build" basedir=".">
 	
-	<target name="build">
-		<mkdir dir="${basedir}/build"/>
-		<mkdir dir="${basedir}/build/classes"/>
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="build.classes.dir" value="${build.dir}/classes"/>
+	<property name="src.dir" value="${basedir}/src"/>
+
+
+
+	<target name="build" depends="clean">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.classes.dir}"/>
 
 		<javac
-			srcdir="${basedir}/src"
-            destdir="${basedir}/build/classes"
+			srcdir="${src.dir}"
+            destdir="${build.classes.dir}"
             debug="true"
             debuglevel="lines,vars,source"
             encoding="utf-8"
@@ -16,8 +22,31 @@
             target="1.7"
             source="1.7"
 			includeantruntime="false">
+			<!-- vajalik?
 			<classpath refid="compile.classpath"/>
+			-->
 		</javac>
 
 	</target>
+
+	<!-- Clean up build system results -->
+	<target name="clean" description="Clean up build system results">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="run" depends="build">
+		<!--classpath ref ja fork vajalikud? -->
+		<java classname="ee.ut.math.tvt.Team2.Intro"/>
+	</target>
+
+
+	<!-- TODO -->
+	<target name="dist">
+
+	</target>
+
+	<target name="jrun" depends="dist">
+
+	</target>
+
 </project>
