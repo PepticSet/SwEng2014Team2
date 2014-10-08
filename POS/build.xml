@@ -1,1 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<project name ="POS" default="build" basedir=".">
+	
+	<target name="build">
+		<mkdir dir="${basedir}/build"/>
+		<mkdir dir="${basedir}/build/classes"/>
+
+		<javac
+			srcdir="${basedir}/src"
+            destdir="${basedir}/build/classes"
+            debug="true"
+            debuglevel="lines,vars,source"
+            encoding="utf-8"
+            compiler="modern"
+            target="1.7"
+            source="1.7"
+			includeantruntime="false">
+			<classpath refid="compile.classpath"/>
+		</javac>
+
+	</target>
+</project>
