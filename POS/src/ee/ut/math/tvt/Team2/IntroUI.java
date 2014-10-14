@@ -1,54 +1,108 @@
 package ee.ut.math.tvt.Team2;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+
+import javax.swing.JLabel;
 
 import org.apache.log4j.Logger;
-
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 public class IntroUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger log = Logger.getLogger(IntroUI.class);
+	private static final Logger log = Logger.getLogger(IntroUI_.class);
 
-	public IntroUI() {
-		setTitle("Intro UI for Team 2");
+	private JPanel contentPane;
 
-		// set L&F to the nice Windows style
-		try {
-			UIManager.setLookAndFeel(new WindowsLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e1) {
-			log.warn(e1.getMessage());
-		}
-
-		drawWidgets();
-
-		// size & location
-		int width = 400;
-		int height = 600;
-		setSize(width, height);
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation((screen.width - width) / 2, (screen.height - height) / 2);
-
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					IntroUI frame = new IntroUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
 
-	private void drawWidgets() {
-		JTabbedPane tabbedPane = new JTabbedPane();
-
-		getContentPane().add(tabbedPane);
+	/**
+	 * Create the frame.
+	 */
+	public IntroUI() {
+		setTitle("Team 2");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblTeamName = new JLabel("Team name:");
+		contentPane.add(lblTeamName, "2, 2");
+		
+		JLabel teamNameDetails = new JLabel("");
+		contentPane.add(teamNameDetails, "4, 2");
+		
+		JLabel lblTeamLeader = new JLabel("Team leader:");
+		contentPane.add(lblTeamLeader, "2, 4");
+		
+		JLabel teamLeaderDetails = new JLabel("");
+		contentPane.add(teamLeaderDetails, "4, 4");
+		
+		JLabel lblTeamLeaderEmail = new JLabel("Team leader email:");
+		contentPane.add(lblTeamLeaderEmail, "2, 6");
+		
+		JLabel teamLeaderEmailDetails = new JLabel("");
+		contentPane.add(teamLeaderEmailDetails, "4, 6");
+		
+		JLabel lblTeamMembers = new JLabel("Team members:");
+		contentPane.add(lblTeamMembers, "2, 8");
+		
+		JLabel teamMembersDetails = new JLabel("");
+		contentPane.add(teamMembersDetails, "4, 8");
+		
+		JLabel lblLogo = new JLabel("Logo:");
+		contentPane.add(lblLogo, "2, 10");
+		
+		JLabel logo = new JLabel("");
+		contentPane.add(logo, "4, 10");
+		
+		JLabel lblVersion = new JLabel("Version:");
+		contentPane.add(lblVersion, "2, 12");
+		
+		JLabel versionDetails = new JLabel("");
+		contentPane.add(versionDetails, "4, 12");
 	}
+
 }

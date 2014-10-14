@@ -8,7 +8,6 @@ public class Intro {
 	public static void main(String args[]) {
 		final IntroUI ui = new IntroUI();
 		ui.setVisible(true);
-
-		log.info("SalesSystem started");
+		log.info("UI started");
 	}
 }
