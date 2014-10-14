@@ -8,11 +8,23 @@
 	<property name="lib.dir" value="${basedir}/lib"/>
 
 	
+	
+	<fileset id="lib.fileset" dir="lib">
+		<include name="*.jar" />
+	</fileset>
+	
+	<path id="master-classpath">
+		<fileset refid="lib.fileset" />
+		<pathelement path="${build}" />
+	</path>
+	
+	<!--
 	<path id="3rd-party-classpath">
 	    <fileset dir="${lib.dir}">
-	        <include name="**/*.jar" />
-	    </fileset>
+	    	<include name="**/*.jar" />
+		</fileset>
 	</path>
+	-->
 
 	<target name="build" depends="clean">
 		<mkdir dir="${build.dir}"/>
@@ -27,8 +39,8 @@
             compiler="modern"
             target="1.7"
             source="1.7"
-			includeantruntime="false">
-			<classpath refid="3rd-party-classpath"/>
+			includeantruntime="false"
+			classpathref="master-classpath">
 		</javac>
 
 	</target>
@@ -41,10 +53,12 @@
 	<target name="run" depends="build">
 		<!--classpath ref ja fork vajalikud? -->
 		<java classname="ee.ut.math.tvt.Team2.Intro.java" fork="true">
+			<!--
 			<classpath>
 			    <pathelement location="${build.dir}" />
 			    <path refid="3rd-party-classpath" />
 			</classpath>
+			-->
 		</java>
 	</target>
 
@@ -67,10 +81,12 @@
 	
 	<target name="jrun" depends="dist">
 		<java jar="${build.dir}/jar/Team2.jar" fork="true">
+			<!--
 			<classpath>
 				<pathelement location="${build.dir}" />
 				<path refid="3rd-party-classpath" />
 			</classpath>
+			-->
 		</java>
 	</target>
 
