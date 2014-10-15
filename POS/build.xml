@@ -2,29 +2,39 @@
 
 <project name ="POS" default="build" basedir=".">
 	
-	<property name="build.dir" value="${basedir}/build"/>
-	<property name="build.classes.dir" value="${build.dir}/classes"/>
-	<property name="src.dir" value="${basedir}/src"/>
-	<property name="lib.dir" value="${basedir}/lib"/>
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="etc.dir" value="${basedir}/etc" />
+	<property name="main.class" value="ee.ut.math.tvt.Team2.Intro" />
 
 	
 	
-	<fileset id="lib.fileset" dir="lib">
-		<include name="*.jar" />
-	</fileset>
-	
-	<path id="master-classpath">
-		<fileset refid="lib.fileset" />
-		<pathelement path="${build}" />
+	<!-- classpaths -->
+	<path id="build.classpath">
+		<fileset id="build.libs" dir="${lib.dir}" includes="*.jar"/>
 	</path>
 	
-	<!--
-	<path id="3rd-party-classpath">
-	    <fileset dir="${lib.dir}">
-	    	<include name="**/*.jar" />
+	
+	<path id="run.classpath">
+		<pathelement location="${build.classes.dir}" />
+		<pathelement location="${etc.dir}"/>
+		<path refid="build.classpath" />
+	</path>
+	
+	
+	<path id="dist.files">
+		<fileset dir="${etc.dir}">
+			<exclude name="*.dtd"/>
 		</fileset>
+        <pathelement location="application.properties"/>
+        <pathelement location="version.properties"/>
 	</path>
-	-->
+	
+	
+	
+	<!-- TARGETS -->
 
 	<target name="build" depends="clean">
 		<mkdir dir="${build.dir}"/>
@@ -39,38 +49,45 @@
             compiler="modern"
             target="1.7"
             source="1.7"
-			includeantruntime="false"
-			classpathref="master-classpath">
+			includeantruntime="false">
+			
+			<classpath refid="build.classpath" />
 		</javac>
 
 	</target>
 
+	
 	<!-- Clean up build system results -->
 	<target name="clean" description="Clean up build system results">
 		<delete dir="${build.dir}"/>
 	</target>
 
+	
 	<target name="run" depends="build">
-		<!--classpath ref ja fork vajalikud? -->
-		<java classname="ee.ut.math.tvt.Team2.Intro.java" fork="true">
-			<!--
-			<classpath>
-			    <pathelement location="${build.dir}" />
-			    <path refid="3rd-party-classpath" />
-			</classpath>
-			-->
+		<java classname="${main.class}" fork="true">
+			<classpath refid="run.classpath" />
 		</java>
 	</target>
 
 
-	<!-- does this work? -->
-	<target name="dist">
-		<mkdir dir="${build.dir}/jar	"/>
-		<jar destfile="${build.dir}/jar/Team2.jar">
+	<target name="dist" depends="build">
+		<mkdir dir="${build.dir}/jar"/>
+		
+        <manifestclasspath property="jar.classpath" jarfile="${build.dir}/jar/Team2.jar">
+                <classpath refid="build.classpath"/>
+        </manifestclasspath>
+		
+		<jar jarfile="${build.dir}/jar/Team2.jar" basedir="${build.classes.dir}">
+            <zipgroupfileset refid="build.libs" />
+            <zipfileset dir="${basedir}/resources" />
+            <path refid="dist.files"/>
+			
 			<manifest>
-				<attribute name="Main-Class" value="ee.ut.math.tvt.Team2.Intro.java"/>
+				<attribute name="Main-Class" value="${main.class}"/>
+				<attribute name="Class-Path" value="${jar.classpath}"/>
 			</manifest>
 		</jar>
+		
 		<!-- build number updating -->
 		<propertyfile
 			file="version.properties">
@@ -80,14 +97,7 @@
 
 	
 	<target name="jrun" depends="dist">
-		<java jar="${build.dir}/jar/Team2.jar" fork="true">
-			<!--
-			<classpath>
-				<pathelement location="${build.dir}" />
-				<path refid="3rd-party-classpath" />
-			</classpath>
-			-->
-		</java>
+		<java jar="${build.dir}/jar/Team2.jar" fork="true" />
 	</target>
 
 </project>
