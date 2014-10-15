@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.Team2;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 public class Intro {
@@ -8,6 +9,7 @@ public class Intro {
 	public static void main(String args[]) {
 		try {
 			final IntroUI ui = new IntroUI();
+			BasicConfigurator.configure();
 			ui.setVisible(true);
 			log.info("UI started");
 		} catch (Exception e) {
