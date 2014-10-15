@@ -6,8 +6,12 @@ public class Intro {
 	private static final Logger log = Logger.getLogger(Intro.class);
 
 	public static void main(String args[]) {
-		final IntroUI ui = new IntroUI();
-		ui.setVisible(true);
-		log.info("UI started");
+		try {
+			final IntroUI ui = new IntroUI();
+			ui.setVisible(true);
+			log.info("UI started");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
