@@ -36,7 +36,7 @@
 	
 	<!-- TARGETS -->
 
-	<target name="build" depends="clean">
+	<target name="build" >
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${build.classes.dir}"/>
 
@@ -96,7 +96,7 @@
 	</target>
 
 	
-	<target name="jrun" depends="dist">
+	<target name="jrun" depends="dist" >
 		<java jar="${build.dir}/jar/Team2.jar" fork="true" />
 	</target>
 
