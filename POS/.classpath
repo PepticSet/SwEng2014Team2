@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-configuration-1.10.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-lang-2.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-logging-1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/forms-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/commons-configuration-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/forms-1.3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jgoodies-common-1.4.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jgoodies-looks-2.5.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.17.jar"/>

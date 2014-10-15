@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -91,7 +92,7 @@ public class IntroUI extends JFrame {
 		JLabel lblTeamMembers = new JLabel("Team members:");
 		contentPane.add(lblTeamMembers, "2, 8");
 
-		JLabel teamMembersDetails = new JLabel(String.join(", ", applicationProperties.getStringArray("TeamMembers")));
+		JLabel teamMembersDetails = new JLabel(StringUtils.join(applicationProperties.getStringArray("TeamMembers"), ", "));
 		contentPane.add(teamMembersDetails, "4, 8");
 
 		JLabel lblLogo = new JLabel("Logo:");
