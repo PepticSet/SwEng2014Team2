@@ -88,7 +88,7 @@
 		</manifestclasspath>
 
 		<jar jarfile="${build.dir}/jar/Team2.jar" basedir="${build.classes.dir}">
-			<zipgroupfileset refid="build.libs" />
+			<zipfileset refid="build.libs" />
 			<zipfileset dir="${basedir}/resources" />
 			<path refid="dist.files"/>
 
