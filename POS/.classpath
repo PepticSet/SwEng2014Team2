@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/commons-configuration-1.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Karl/PROGE/SWEngTeam2/POS/lib/commons-logging-1.2.jar"/>
