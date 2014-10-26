@@ -115,5 +115,27 @@
 				<arg value="console" />
 			</java>
 	</target>
-
+	
+	<target name="git_commit">
+		<input
+			message="Write a comment for your commit:"
+			addproperty="comment.text"/>
+		<exec executable="cmd">
+			<arg value="git add -A"/>
+			<arg value="git commit -m '${comment.text}'"/>
+			<arg value="git push"/>
+		</exec>
+	</target>
+	
+	<target name="git_tag">
+		<exec executable="cmd">
+			<input message="Enter tag name:"
+			    addproperty="tag.name"/>
+			<input message="Enter comment about tag:"
+				addproperty="comment.tag"/>
+			<arg value="git tag -a ${tag.name} -m '${comment.tag}'"/>
+			<arg value="git push --tags"/>
+		</exec>
+	</target>
+	
 </project>
