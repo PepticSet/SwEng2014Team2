@@ -128,11 +128,11 @@
 	</target>
 	
 	<target name="git_tag">
+		<input message="Enter tag name:"
+			addproperty="tag.name"/>
+		<input message="Enter comment about tag:"
+			addproperty="comment.tag"/>
 		<exec executable="cmd">
-			<input message="Enter tag name:"
-			    addproperty="tag.name"/>
-			<input message="Enter comment about tag:"
-				addproperty="comment.tag"/>
 			<arg value="git tag -a ${tag.name} -m '${comment.tag}'"/>
 			<arg value="git push --tags"/>
 		</exec>
