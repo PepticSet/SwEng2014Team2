@@ -118,11 +118,11 @@
 	
 	<target name="git_commit">
 		<input
-			message="Password:"
-			addproperty="password.github"/>
-		<input
 			message="Username:"
 			addproperty="user.github"/>
+		<input
+			message="Password:"
+			addproperty="password.github"/>
 		<input
 			message="Write a comment for your commit:"
 			addproperty="comment.text"/>
