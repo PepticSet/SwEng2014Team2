@@ -118,16 +118,22 @@
 	
 	<target name="git_commit">
 		<input
+			message="Password:"
+			addproperty="password.github"/>
+		<input
+			message="Username:"
+			addproperty="user.github"/>
+		<input
 			message="Write a comment for your commit:"
 			addproperty="comment.text"/>
 		<exec executable="cmd">
 			<arg value="git add -A"/>
 			<arg value="git commit -m '${comment.text}'"/>
-			<arg value="git push"/>
+			<arg value="git push https://${user.github}:${password.github}@github.com/PepticSet/SwEng2014Team2.git"/>
 		</exec>
 	</target>
 	
-	<target name="git_tag">
+	<target name="git_tag" depends="git_commit">
 		<input message="Enter tag name:"
 			addproperty="tag.name"/>
 		<input message="Enter comment about tag:"
