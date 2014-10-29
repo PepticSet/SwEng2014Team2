@@ -39,14 +39,15 @@ public class Intro {
 			introUI.setVisible(false);
 		}
 		
-		
-		try {
-			final IntroUI ui = new IntroUI();
-			BasicConfigurator.configure();
-			ui.setVisible(true);
-			log.info("UI started");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		//old
+//		try {
+//			final IntroUI ui = new IntroUI();
+//			BasicConfigurator.configure();
+//			ui.setVisible(true);
+//			log.info("UI started");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }
