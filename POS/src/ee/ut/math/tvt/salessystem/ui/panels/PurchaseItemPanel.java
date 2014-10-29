@@ -27,7 +27,7 @@ import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 /**
- * Purchase pane + shopping cart tabel UI.
+ * Purchase pane + shopping cart table UI.
  */
 public class PurchaseItemPanel extends JPanel {
 
