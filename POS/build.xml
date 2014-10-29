@@ -110,7 +110,7 @@
 	</target>
 
 
-	<target name="jrun" depends="dist" >
+	<target name="jrun" >
 		<java jar="${build.dir}/jar/Team2.jar" fork="true" />
 	</target>
 	
