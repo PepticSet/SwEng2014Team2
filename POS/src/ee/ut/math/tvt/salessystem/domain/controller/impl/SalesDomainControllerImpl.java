@@ -24,7 +24,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		PaymentDialog payment = new PaymentDialog(goods);
 		payment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		payment.setVisible(true);
-		//draw();
 		
 		// XXX - Save purchase
 	}

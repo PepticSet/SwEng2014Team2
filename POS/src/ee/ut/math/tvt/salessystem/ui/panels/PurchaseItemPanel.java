@@ -210,10 +210,8 @@ public class PurchaseItemPanel extends JPanel {
 	 */
 	public void reset() {
 		nameField.removeAllItems();
-		for (StockItem stockItem : model.getWarehouseTableModel()
-				.getTableRows()) {
-			((DefaultComboBoxModel<StockItem>) nameField.getModel())
-					.addElement(stockItem);
+		for (StockItem stockItem : model.getWarehouseTableModel().getTableRows()) {
+			((DefaultComboBoxModel<StockItem>) nameField.getModel()).addElement(stockItem);
 		}
 		barCodeField.setText("");
 		quantityField.setText("1");
