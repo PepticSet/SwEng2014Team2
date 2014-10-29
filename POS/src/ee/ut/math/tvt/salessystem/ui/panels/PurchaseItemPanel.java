@@ -189,7 +189,8 @@ public class PurchaseItemPanel extends JPanel {
 					JOptionPane.ERROR_MESSAGE);
 		} else {
 			SoldItem soldItem = new SoldItem(stockItem, quantity);
-			soldItems.add(soldItem);
+			//what is this doing here?
+			//soldItems.add(soldItem);
 			model.getCurrentPurchaseTableModel().addItem(soldItem);
 		}
 	}
