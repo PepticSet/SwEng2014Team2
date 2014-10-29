@@ -10,18 +10,16 @@ import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.ui.PaymentDialog;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 /**
  * Implementation of the sales domain controller.
  */
 public class SalesDomainControllerImpl implements SalesDomainController {
 	
-	public void submitCurrentPurchase(List<SoldItem> goods) throws VerificationFailedException {
-		// Let's assume we have checked and found out that the buyer is underaged and
-		// cannot buy chupa-chups
-		//throw new VerificationFailedException("Underaged!");
+	public void submitCurrentPurchase(List<SoldItem> goods, SalesSystemModel model) throws VerificationFailedException {
 		
-		PaymentDialog payment = new PaymentDialog(goods);
+		PaymentDialog payment = new PaymentDialog(goods, model);
 		payment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		payment.setVisible(true);
 		
@@ -52,5 +50,12 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		dataset.add(beer);
 		
 		return dataset;
+	}
+
+	@Override
+	public void submitCurrentPurchase(List<SoldItem> goods)
+			throws VerificationFailedException {
+		// TODO Auto-generated method stub
+		
 	}
 }

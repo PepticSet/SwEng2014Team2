@@ -14,9 +14,13 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
+import ee.ut.math.tvt.salessystem.ui.model.DetailedHistoryTableModel;
+import ee.ut.math.tvt.salessystem.ui.model.HistoryTableModel;
 import ee.ut.math.tvt.salessystem.ui.model.PurchaseInfoTableModel;
+import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -28,6 +32,7 @@ import javax.swing.JTextField;
 
 public class PaymentDialog extends JDialog {
 	
+	private SalesSystemModel model;
 	private List<SoldItem> purchaseTable;
 	
 	private JTextField textFieldPayment;
@@ -39,9 +44,10 @@ public class PaymentDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	//private JTextField textField;
 
-	public PaymentDialog(List<SoldItem> goods) {
+	public PaymentDialog(List<SoldItem> goods, SalesSystemModel model) {
 		
 		this.purchaseTable = goods;
+		this.model = model;
 		
 		setTitle("Payment processing");
 		setBounds(100, 100, 300, 214);
@@ -146,8 +152,14 @@ public class PaymentDialog extends JDialog {
 	}
 	
 	private void acceptButtonClicked() {
-		//XXX 
 		
+		model.getHistoryTableModel().addItem(new HistoryItem(purchaseTable));
+		
+		for(SoldItem item : purchaseTable) {
+			model.getDetailedHistoryTableModel().addItem(item);
+		}
+		
+		//XXX remove from stock
 		
 		dispose();
 	}

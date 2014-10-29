@@ -19,7 +19,7 @@ import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
  */
 public class HistoryTab {
     
-    // TODO - implement!
+    // TODO - implement detailed history
 
 	private SalesSystemModel model;
 	
@@ -29,7 +29,7 @@ public class HistoryTab {
     
     public Component draw() {
         JPanel panel = new JPanel();
-        // TODO - Sales history tabel
+        
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		GridBagLayout gb = new GridBagLayout();
@@ -51,8 +51,7 @@ public class HistoryTab {
     private Component drawHistoryMainPane() {
 		JPanel panel = new JPanel();
 
-		// XXX history model vaja
-		JTable table = new JTable();
+		JTable table = new JTable(model.getHistoryTableModel());
 
 		JTableHeader header = table.getTableHeader();
 		header.setReorderingAllowed(false);
@@ -68,7 +67,7 @@ public class HistoryTab {
 		panel.setLayout(gb);
 		panel.add(scrollPane, gc);
 
-		panel.setBorder(BorderFactory.createTitledBorder("History"));
+		panel.setBorder(BorderFactory.createTitledBorder("Completed orders"));
 		return panel;
     }
 }

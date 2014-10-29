@@ -12,20 +12,19 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	private double price;
 	private String date;
 	private String time;
-	private List<SoldItem> soldGoods;
+	//private List<SoldItem> soldGoods;
 	
 	public HistoryItem(List<SoldItem> soldGoods) {
 		super();
-		this.soldGoods = soldGoods;
+		//this.soldGoods = soldGoods;
 		
 		this.price = getSum(soldGoods);
 		
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
 		SimpleDateFormat dateF = new SimpleDateFormat("dd.MM.yyyy");
 		SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
 		Calendar calendar = Calendar.getInstance();
 		this.date = dateF.format(calendar.getTime());
-		this.date = timeF.format(calendar.getTime());
+		this.time = timeF.format(calendar.getTime());
 	}
 	
 	//helper
@@ -57,8 +56,8 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		return price;
 	}
 
-	public List<SoldItem> getSoldGoods() {
-		return soldGoods;
-	}
+//	public List<SoldItem> getSoldGoods() {
+//		return soldGoods;
+//	}
 
 }
