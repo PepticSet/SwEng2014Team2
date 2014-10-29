@@ -9,7 +9,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 
 	
 	private Long id;
-	private double sum;
+	private double price;
 	private String date;
 	private String time;
 	private List<SoldItem> soldGoods;
@@ -18,7 +18,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		super();
 		this.soldGoods = soldGoods;
 		
-		this.sum = getSum(soldGoods);
+		this.price = getSum(soldGoods);
 		
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
 		SimpleDateFormat dateF = new SimpleDateFormat("dd.MM.yyyy");
@@ -53,8 +53,8 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		return time;
 	}
 
-	public double getSum() {
-		return sum;
+	public double getPrice() {
+		return price;
 	}
 
 	public List<SoldItem> getSoldGoods() {
