@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 
+import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 /**
@@ -53,6 +54,16 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		fireTableDataChanged();
 	}
 
+	public void removeItem(final SoldItem soldItem) {
+		try {
+			StockItem item = getItemById(soldItem.getId());
+			item.setQuantity(item.getQuantity() - soldItem.getQuantity());
+		}
+		catch (NoSuchElementException e) {
+		}
+		fireTableDataChanged();
+	}
+
 	@Override
 	public String toString() {
 		final StringBuffer buffer = new StringBuffer();
@@ -71,5 +82,4 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 
 		return buffer.toString();
 	}
-
 }

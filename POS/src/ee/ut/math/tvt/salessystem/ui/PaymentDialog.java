@@ -154,9 +154,12 @@ public class PaymentDialog extends JDialog {
 	private void acceptButtonClicked() {
 		
 		model.getHistoryTableModel().addItem(new HistoryItem(purchaseTable));
+
+		//remove from stock
+		for(SoldItem row : purchaseTable) {
+			model.getWarehouseTableModel().removeItem(row);
+		}
 		
-		
-		//XXX remove from stock
 		
 		dispose();
 	}
