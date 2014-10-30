@@ -72,12 +72,6 @@
 		<delete dir="${build.dir}"/>
 	</target>
 
-
-	<!--	<target name="run" depends="build">
-		<java classname="${main.class}" fork="true">
-			<classpath refid="run.classpath" />
-		</java>
-	</target>-->
 	
 	<target name="run" depends="build">
 			<java classname="ee.ut.math.tvt.Team2.Intro"
@@ -86,6 +80,7 @@
 			   <jvmarg value="-Xdebug" />
 			   <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
 			</java>
+			<echo message="Listening for transport dt_socket at address: 1044"/>
 		</target>
 
 
