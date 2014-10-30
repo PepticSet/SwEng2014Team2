@@ -73,15 +73,18 @@
 	</target>
 
 	
-	<target name="run" depends="build">
-			<java classname="ee.ut.math.tvt.Team2.Intro"
-			     classpathref="run.classpath"
-			     fork="yes">
-			   <jvmarg value="-Xdebug" />
-			   <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
-			</java>
-			<echo message="Listening for transport dt_socket at address: 1044"/>
-		</target>
+
+	<target name="run" depends="build" description="Runs the new build project">
+	               <java classname="ee.ut.math.tvt.Team2.Intro"
+	                    classpathref="run.classpath"
+	                    fork="yes">
+	                  <jvmarg value="-Xdebug" />
+	                  <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+	                  <jvmarg value = "-Xnoagent"/>
+	                  <jvmarg value = "-Djava.compiler= NONE"/>
+	                </java>
+					
+	        </target>
 
 
 	<target name="dist" depends="build">
