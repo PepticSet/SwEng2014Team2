@@ -12,11 +12,11 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	private double price;
 	private String date;
 	private String time;
-	//private List<SoldItem> soldGoods;
+	private List<SoldItem> soldGoods;
 	
 	public HistoryItem(List<SoldItem> soldGoods) {
 		super();
-		//this.soldGoods = soldGoods;
+		this.soldGoods = soldGoods;
 		
 		this.price = getSum(soldGoods);
 		
@@ -56,8 +56,8 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		return price;
 	}
 
-//	public List<SoldItem> getSoldGoods() {
-//		return soldGoods;
-//	}
+	public List<SoldItem> getSoldGoods() {
+		return soldGoods;
+	}
 
 }

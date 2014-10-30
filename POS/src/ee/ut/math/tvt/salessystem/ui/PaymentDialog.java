@@ -155,9 +155,6 @@ public class PaymentDialog extends JDialog {
 		
 		model.getHistoryTableModel().addItem(new HistoryItem(purchaseTable));
 		
-		for(SoldItem item : purchaseTable) {
-			model.getDetailedHistoryTableModel().addItem(item);
-		}
 		
 		//XXX remove from stock
 		
