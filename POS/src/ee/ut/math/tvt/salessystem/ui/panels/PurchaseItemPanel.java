@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.domain.exception.OutOfStockException;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 /**
@@ -173,8 +174,7 @@ public class PurchaseItemPanel extends JPanel {
 		StockItem stockItem = getStockItemByBarcode();
 		if (stockItem == null)
 			return;
-		StockItem warehouseItem = model.getWarehouseTableModel().getItemById(
-				stockItem.getId());
+
 		int quantity;
 		try {
 			quantity = Integer.parseInt(quantityField.getText());
@@ -182,16 +182,16 @@ public class PurchaseItemPanel extends JPanel {
 			quantity = 1;
 		}
 
-		if (warehouseItem.getQuantity() < quantity) {
-			String errorMessage = "Only " + warehouseItem.getQuantity() + " "
+		try {
+			SoldItem soldItem = new SoldItem(stockItem, quantity);
+			model.getCurrentPurchaseTableModel().addItem(soldItem);
+		} catch (OutOfStockException ex) {
+			int warehouseQuantity = model.getWarehouseTableModel()
+					.getItemById(stockItem.getId()).getQuantity();
+			String errorMessage = "Only " + warehouseQuantity + " "
 					+ stockItem.getName() + " in stock.";
 			JOptionPane.showMessageDialog(null, errorMessage, "Error",
 					JOptionPane.ERROR_MESSAGE);
-		} else {
-			SoldItem soldItem = new SoldItem(stockItem, quantity);
-			//what is this doing here?
-			//soldItems.add(soldItem);
-			model.getCurrentPurchaseTableModel().addItem(soldItem);
 		}
 	}
 
@@ -210,8 +210,10 @@ public class PurchaseItemPanel extends JPanel {
 	 */
 	public void reset() {
 		nameField.removeAllItems();
-		for (StockItem stockItem : model.getWarehouseTableModel().getTableRows()) {
-			((DefaultComboBoxModel<StockItem>) nameField.getModel()).addElement(stockItem);
+		for (StockItem stockItem : model.getWarehouseTableModel()
+				.getTableRows()) {
+			((DefaultComboBoxModel<StockItem>) nameField.getModel())
+					.addElement(stockItem);
 		}
 		barCodeField.setText("");
 		quantityField.setText("1");
