@@ -134,10 +134,19 @@
 		<input
 			message="Write a comment for your commit:"
 			addproperty="comment.text"/>
-		<exec executable="cmd">
-			<arg value="git add -A"/>
-			<arg value="git commit -m '${comment.text}'"/>
-			<arg value="git push https://${user.github}:${password.github}@github.com/PepticSet/SwEng2014Team2.git"/>
+		<exec executable="git">
+			<arg value="add"/>
+			<arg value="-A"/>
+		</exec>
+		<exec executable="git">
+			<arg value="commit"/>
+			<arg value="-m"/>
+			<arg value="${comment.text}"/>
+			
+		</exec>
+		<exec executable="git">
+			<arg value="push"/>
+			<arg value="https://${user.github}:${password.github}@github.com/PepticSet/SwEng2014Team2.git"/>
 		</exec>
 	</target>
 	
