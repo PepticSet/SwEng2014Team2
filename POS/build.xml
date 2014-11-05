@@ -155,9 +155,11 @@
 			addproperty="tag.name"/>
 		<input message="Enter comment about tag:"
 			addproperty="comment.tag"/>
-		<exec executable="cmd">
-			<arg value="git tag -a ${tag.name} -m '${comment.tag}'"/>
-			<arg value="git push --tags"/>
+		<exec executable="git">
+			<arg line="tag -a ${tag.name} -m '${comment.tag}'"/>
+		</exec>
+		<exec executable="git">
+			<arg line="push --tags"/>
 		</exec>
 	</target>
 	
