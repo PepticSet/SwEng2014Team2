@@ -10,17 +10,37 @@
     <property name="res.dir" value="${basedir}/resources" />
 	<property name="main.class" value="ee.ut.math.tvt.Team2.Intro" />
 
+	<!-- database variables -->
+	<property name="data.dir"	value="${basedir}/data"/>
+	<property name="db.file"	value="${data.dir}/POSdb"/>
+	<property name="db.alias"	value="POS"/>
+	<property name="db.url" 	value="jdbc:hsqldb:hsql://localhost/POS"/>
+	<property name="lib.hibernate.dir"   value="${lib.dir}/hibernate"/>
+
 
 
 	<!-- classpaths -->
 	<path id="build.classpath">
 		<fileset id="build.libs" dir="${lib.dir}" includes="*.jar"/>
+
+		<!-- see läheb siia ju? dist.files ka?-->
+		<fileset dir="${lib.hibernate.dir}">
+			<include name="*.jar"/>
+		</fileset>
 	</path>
 
 
 	<path id="run.classpath">
 		<pathelement location="${build.classes.dir}" />
 		<pathelement location="${etc.dir}"/>
+		<fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+
+        <fileset dir="${lib.hibernate.dir}">
+            <include name="*.jar"/>
+        </fileset>
+
 		<path refid="build.classpath" />
 	</path>
 
@@ -80,8 +100,8 @@
 	                    fork="yes">
 	                  <jvmarg value="-Xdebug" />
 	                  <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
-	                  <jvmarg value = "-Xnoagent"/>
-	                  <jvmarg value = "-Djava.compiler= NONE"/>
+	                  <jvmarg value="-Xnoagent"/>
+	                  <jvmarg value="-Djava.compiler= NONE"/>
 	                </java>
 					
 	        </target>
@@ -161,6 +181,26 @@
 		<exec executable="git">
 			<arg line="push --tags"/>
 		</exec>
+	</target>
+
+	<target name="dbmanager" description="Start the HSQLDB manager">
+		<java
+			classname="org.hsqldb.util.DatabaseManagerSwing"
+			classpathref="run.classpath"
+			fork="yes"
+		>
+			<arg line="--user sa --url ${db.url}" />
+		</java>
+	</target>
+
+	<target name="startdb" description="Start the HSQLDB with the default params">
+		<java
+			classname="org.hsqldb.Server"
+			classpathref="run.classpath"
+			fork="yes"
+		>
+			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
+		</java>
 	</target>
 	
 </project>
