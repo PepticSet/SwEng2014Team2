@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.domain.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class HistoryItem implements Cloneable, DisplayableItem {

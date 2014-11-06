@@ -4,6 +4,11 @@ import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 
 public class DetailedHistoryTableModel extends SalesSystemTableModel<SoldItem> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public DetailedHistoryTableModel() {
 		super(new String[] {"Id", "Name", "Price", "Quantity", "Sum"});
 	}
