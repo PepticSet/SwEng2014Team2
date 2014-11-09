@@ -1,22 +1,32 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+import javax.persistence.*;
+
 /**
  * Stock item. Corresponds to the Data Transfer Object design pattern.
  */
+@Entity(name = "StockItem")
 public class StockItem implements Cloneable, DisplayableItem {
 	
+	@Id
+	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+	@Column(name = "name")
     private String name;
 
+	@Column(name = "price")
     private double price;
-
+	
+	@Column(name = "description")
     private String description;
     
+	@Column(name = "quantity")
     private int quantity;
 
     /**
-     * Constucts new <code>StockItem</code> with the specified values.
+     * Constructs new <code>StockItem</code> with the specified values.
      * @param id barcode id
      * @param name name of the product
      * @param desc description of the product
