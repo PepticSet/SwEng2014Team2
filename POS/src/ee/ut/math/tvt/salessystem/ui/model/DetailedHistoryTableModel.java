@@ -10,7 +10,7 @@ public class DetailedHistoryTableModel extends SalesSystemTableModel<SoldItem> {
 	private static final long serialVersionUID = 1L;
 
 	public DetailedHistoryTableModel() {
-		super(new String[] {"Id", "Name", "Price", "Quantity", "Sum"});
+		super(new String[] { "Id", "Name", "Price", "Quantity", "Sum" });
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class DetailedHistoryTableModel extends SalesSystemTableModel<SoldItem> {
 		}
 		throw new IllegalArgumentException("Column index unsuitable");
 	}
-	
+
 	public void addItem(final SoldItem item) {
 		rows.add(item);
 		fireTableDataChanged();

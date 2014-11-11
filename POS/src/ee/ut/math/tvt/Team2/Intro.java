@@ -13,12 +13,12 @@ public class Intro {
 	private static final String MODE = "console";
 
 	public static void main(String args[]) {
-		
+
 		final SalesDomainController domainController = new SalesDomainControllerImpl();
 		BasicConfigurator.configure();
 		if (args.length == 1 && args[0].equals(MODE)) {
 			log.debug("Mode: " + MODE);
-			
+
 			ConsoleUI cui = new ConsoleUI(domainController);
 			cui.run();
 		} else {
@@ -38,16 +38,15 @@ public class Intro {
 			}
 			introUI.setVisible(false);
 		}
-		
 
-		//old
-//		try {
-//			final IntroUI ui = new IntroUI();
-//			BasicConfigurator.configure();
-//			ui.setVisible(true);
-//			log.info("UI started");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		// old
+		// try {
+		// final IntroUI ui = new IntroUI();
+		// BasicConfigurator.configure();
+		// ui.setVisible(true);
+		// log.info("UI started");
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 	}
 }

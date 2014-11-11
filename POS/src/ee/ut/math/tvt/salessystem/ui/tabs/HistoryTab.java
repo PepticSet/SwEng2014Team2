@@ -23,19 +23,19 @@ import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
  * labelled "History" in the menu).
  */
 public class HistoryTab {
-    
-    // TODO - implement detailed history
+
+	// TODO - implement detailed history
 
 	private SalesSystemModel model;
-	
-    public HistoryTab(SalesSystemModel model) {
-    	this.model = model;
-    } 
-    
-    public Component draw() {
-        JPanel panel = new JPanel();
-        
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+	public HistoryTab(SalesSystemModel model) {
+		this.model = model;
+	}
+
+	public Component draw() {
+		JPanel panel = new JPanel();
+
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		GridBagLayout gb = new GridBagLayout();
 		GridBagConstraints gc = new GridBagConstraints();
@@ -52,55 +52,56 @@ public class HistoryTab {
 		gc.weighty = 0.5;
 		gc.fill = GridBagConstraints.BOTH;
 		panel.add(drawHistoryDetailsPane(), gc);
-        return panel;
-    }
-    
-    private Component drawHistoryMainPane() {
+		return panel;
+	}
+
+	private Component drawHistoryMainPane() {
 		JPanel panel = new JPanel();
 
 		JTable table = new JTable(model.getHistoryTableModel());
-		
+
 		table.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				model.getDetailedHistoryTableModel().clear();
-				
+
 				int row = ((JTable) e.getSource()).getSelectedRow();
-				
-				List<HistoryItem> allOrders = model.getHistoryTableModel().getTableRows();
+
+				List<HistoryItem> allOrders = model.getHistoryTableModel()
+						.getTableRows();
 				HistoryItem item = allOrders.get(row);
-				List<SoldItem>  goods = item.getSoldGoods();
-				
+				List<SoldItem> goods = item.getSoldGoods();
+
 				for (SoldItem soldItem : goods) {
 					model.getDetailedHistoryTableModel().addItem(soldItem);
 				}
-				
+
 			}
 		});
 
@@ -120,13 +121,13 @@ public class HistoryTab {
 
 		panel.setBorder(BorderFactory.createTitledBorder("Completed orders"));
 		return panel;
-    }
-    
-    private Component drawHistoryDetailsPane() {
+	}
+
+	private Component drawHistoryDetailsPane() {
 		JPanel panel = new JPanel();
 
 		JTable table = new JTable(model.getDetailedHistoryTableModel());
-		
+
 		JTableHeader header = table.getTableHeader();
 		header.setReorderingAllowed(false);
 
@@ -143,5 +144,5 @@ public class HistoryTab {
 
 		panel.setBorder(BorderFactory.createTitledBorder("Order details"));
 		return panel;
-    }
+	}
 }

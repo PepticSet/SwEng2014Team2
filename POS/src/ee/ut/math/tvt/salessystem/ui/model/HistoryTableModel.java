@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.ui.model;
 
 import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
 
-
 public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 
 	/**
@@ -11,7 +10,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 	private static final long serialVersionUID = 1L;
 
 	public HistoryTableModel() {
-		super(new String[] {"Date", "Time", "Total Price"});
+		super(new String[] { "Date", "Time", "Total Price" });
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 		}
 		throw new IllegalArgumentException("Column index unsuitable");
 	}
-	
+
 	public void addItem(final HistoryItem item) {
 		rows.add(item);
 		fireTableDataChanged();

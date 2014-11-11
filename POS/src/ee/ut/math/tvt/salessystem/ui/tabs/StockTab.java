@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.JTableHeader;
 
 import org.apache.log4j.Logger;
@@ -79,6 +79,7 @@ public class StockTab {
 	private JButton createAddButton() {
 		JButton b = new JButton("Add");
 		b.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				addButtonClicked();
 			}
@@ -115,7 +116,7 @@ public class StockTab {
 		log.info("Started adding a new item to the warehouse.");
 		AddToWarehouseDialog dialog = new AddToWarehouseDialog(
 				model.getWarehouseTableModel());
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		dialog.setVisible(true);
 		draw();
 	}
