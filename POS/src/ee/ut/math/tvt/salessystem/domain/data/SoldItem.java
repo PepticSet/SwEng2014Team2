@@ -15,7 +15,8 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-	@Column(name = "stockItem")
+	@OneToOne
+	@JoinColumn(name = "STOCKITEM_ID")
     private StockItem stockItem;
     
 	@Column(name = "name")
