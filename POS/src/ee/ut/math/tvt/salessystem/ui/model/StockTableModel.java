@@ -45,32 +45,22 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	 */
 	public void addItem(final StockItem stockItem) {
 		Session sess = HibernateUtil.currentSession();
-		
+
+		Transaction transaction = sess.beginTransaction();
 		try {
-			
-			Transaction transaction = sess.beginTransaction();
-			
-			try {
-			
-				StockItem item = getItemById(stockItem.getId());
-				item.setQuantity(item.getQuantity() + stockItem.getQuantity());
-				log.debug("Found existing item " + stockItem.getName()
+			StockItem item = getItemById(stockItem.getId());
+			item.setQuantity(item.getQuantity() + stockItem.getQuantity());
+			log.debug("Found existing item " + stockItem.getName()
 					+ " increased quantity by " + stockItem.getQuantity());
-			
-			transaction.commit();
-			
-			
-			} catch (NoSuchElementException e) {
-			
-				rows.add(stockItem);
-				log.debug("Added " + stockItem.getName() + " quantity of "
-						+ stockItem.getQuantity());
-			
-				sess.save(stockItem);
-				transaction.commit();	
-			}
+		} catch (NoSuchElementException e) {
+
+			rows.add(stockItem);
+			log.debug("Added " + stockItem.getName() + " quantity of "
+					+ stockItem.getQuantity());
+
+			sess.save(stockItem);
 		} finally {
-			HibernateUtil.closeSession();
+			transaction.commit();
 		}
 		fireTableDataChanged();
 	}
@@ -79,12 +69,12 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		try {
 			Session sess = HibernateUtil.currentSession();
 			Transaction transaction = sess.beginTransaction();
-			
+
 			StockItem item = getItemById(soldItem.getId());
 			item.setQuantity(item.getQuantity() - soldItem.getQuantity());
-			
+
 			transaction.commit();
-			
+
 		} catch (NoSuchElementException e) {
 		}
 		fireTableDataChanged();

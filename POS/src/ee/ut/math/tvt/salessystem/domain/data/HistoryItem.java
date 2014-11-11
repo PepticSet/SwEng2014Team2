@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity(name = "HistoryItem")
 public class HistoryItem implements Cloneable, DisplayableItem {
@@ -30,7 +30,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "time")
 	private String time;
 
-	@ManyToMany
+	@OneToMany
 	@JoinTable(name = "HistoryItem_SoldGoods",
 			joinColumns = @JoinColumn(name = "HistoryItem_ID",
 					referencedColumnName = "ID"),
