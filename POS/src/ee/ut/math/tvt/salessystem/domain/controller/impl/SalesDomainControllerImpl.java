@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.WindowConstants;
 
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
+import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.VerificationFailedException;
@@ -40,7 +41,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 
 	@Override
 	public List<StockItem> loadWarehouseState() {
-		// XXX mock implementation
 //		List<StockItem> dataset = new ArrayList<StockItem>();
 //
 //		StockItem chips = new StockItem(1l, "Lays chips", "Potato chips", 11.0,
@@ -51,13 +51,6 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 //				"Beer sauseges", 15.0, 12);
 //		StockItem beer = new StockItem(4l, "Free Beer", "Student's delight",
 //				0.0, 100);
-//
-//		dataset.add(chips);
-//		dataset.add(chupaChups);
-//		dataset.add(frankfurters);
-//		dataset.add(beer);
-		
-//		return dataset;
 		
 		// uus
 		return HibernateUtil.currentSession().createQuery("from StockItem").list();
@@ -65,7 +58,7 @@ public class SalesDomainControllerImpl implements SalesDomainController {
 		
 	}
 	
-	public List<StockItem> loadHistory() {
+	public List<HistoryItem> loadHistory() {
 		return HibernateUtil.currentSession().createQuery("from HistoryItem").list();
 	}
 
