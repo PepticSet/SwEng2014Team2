@@ -30,13 +30,13 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 		throw new IllegalArgumentException("Column index unsuitable");
 	}
 
-	public void addItem(final HistoryItem item) {
+	public void addItem(final HistoryItem HistoryItem) {
 		Session sess = HibernateUtil.currentSession();
 		Transaction transaction = sess.beginTransaction();
 		
-		rows.add(item);
+		rows.add(HistoryItem);
 		
-		sess.save(item);
+		sess.save(HistoryItem);
 		transaction.commit();
 		
 		fireTableDataChanged();
