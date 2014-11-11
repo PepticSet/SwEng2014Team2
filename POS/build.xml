@@ -7,7 +7,7 @@
 	<property name="src.dir" value="${basedir}/src" />
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="etc.dir" value="${basedir}/etc" />
-    <property name="res.dir" value="${basedir}/resources" />
+	<property name="res.dir" value="${basedir}/resources" />
 	<property name="main.class" value="ee.ut.math.tvt.Team2.Intro" />
 
 	<!-- database variables -->
@@ -34,12 +34,12 @@
 		<pathelement location="${build.classes.dir}" />
 		<pathelement location="${etc.dir}"/>
 		<fileset dir="${lib.dir}">
-            <include name="*.jar"/>
-        </fileset>
+			<include name="*.jar"/>
+		</fileset>
 
-        <fileset dir="${lib.hibernate.dir}">
-            <include name="*.jar"/>
-        </fileset>
+		<fileset dir="${lib.hibernate.dir}">
+			<include name="*.jar"/>
+		</fileset>
 
 		<path refid="build.classpath" />
 	</path>
@@ -92,19 +92,19 @@
 		<delete dir="${build.dir}"/>
 	</target>
 
-	
+
 
 	<target name="run" depends="build" description="Runs the new build project">
-	               <java classname="ee.ut.math.tvt.Team2.Intro"
+		<java classname="ee.ut.math.tvt.Team2.Intro"
 	                    classpathref="run.classpath"
 	                    fork="yes">
-	                  <jvmarg value="-Xdebug" />
-	                  <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
-	                  <jvmarg value="-Xnoagent"/>
-	                  <jvmarg value="-Djava.compiler= NONE"/>
-	                </java>
-					
-	        </target>
+			<jvmarg value="-Xdebug" />
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044" />
+			<jvmarg value="-Xnoagent"/>
+			<jvmarg value="-Djava.compiler= NONE"/>
+		</java>
+
+	</target>
 
 
 	<target name="dist" depends="build">
@@ -136,14 +136,14 @@
 	<target name="jrun" >
 		<java jar="${build.dir}/jar/Team2.jar" fork="true" />
 	</target>
-	
+
 	<target name="runc" depends="build" description="Run the application (console)">
-			<java classname="ee.ut.math.tvt.Team2.Intro" classpathref="run.classpath" fork="yes">
-				<arg value="console" />
-			</java>
+		<java classname="ee.ut.math.tvt.Team2.Intro" classpathref="run.classpath" fork="yes">
+			<arg value="console" />
+		</java>
 	</target>
-	
-	
+
+
 	<target name="git_commit">
 		<input
 			message="Username:"
@@ -162,14 +162,14 @@
 			<arg value="commit"/>
 			<arg value="-m"/>
 			<arg value="${comment.text}"/>
-			
+
 		</exec>
 		<exec executable="git">
 			<arg value="push"/>
 			<arg value="https://${user.github}:${password.github}@github.com/PepticSet/SwEng2014Team2.git"/>
 		</exec>
 	</target>
-	
+
 	<target name="git_tag" depends="git_commit">
 		<input message="Enter tag name:"
 			addproperty="tag.name"/>
@@ -184,23 +184,27 @@
 	</target>
 
 	<target name="dbmanager" description="Start the HSQLDB manager">
-		<java
-			classname="org.hsqldb.util.DatabaseManagerSwing"
-			classpathref="run.classpath"
-			fork="yes"
-		>
-			<arg line="--user sa --url ${db.url}" />
-		</java>
+		<parallel>
+			<java
+				classname="org.hsqldb.util.DatabaseManagerSwing"
+				classpathref="run.classpath"
+				fork="yes"
+			>
+				<arg line="--user sa --url ${db.url}" />
+			</java>
+		</parallel>
 	</target>
 
 	<target name="startdb" description="Start the HSQLDB with the default params">
-		<java
-			classname="org.hsqldb.Server"
-			classpathref="run.classpath"
-			fork="yes"
-		>
-			<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
-		</java>
+		<parallel>
+			<java
+				classname="org.hsqldb.Server"
+				classpathref="run.classpath"
+				fork="yes"
+			>
+				<arg line="-database.0 '${db.file}' -dbname.0 '${db.alias}'" />
+			</java>
+		</parallel>
 	</target>
-	
+
 </project>
