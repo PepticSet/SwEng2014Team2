@@ -148,8 +148,6 @@ public class PurchaseItemPanel extends JPanel {
 
 			barCodeField.setText(barCodeString);
 			priceField.setText(priceString);
-		} else {
-			reset();
 		}
 	}
 
