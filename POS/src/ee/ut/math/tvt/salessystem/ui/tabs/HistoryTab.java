@@ -96,11 +96,8 @@ public class HistoryTab {
 				List<HistoryItem> allOrders = model.getHistoryTableModel()
 						.getTableRows();
 				HistoryItem item = allOrders.get(row);
-				List<SoldItem> goods = item.getSoldGoods();
 
-				for (SoldItem soldItem : goods) {
-					model.getDetailedHistoryTableModel().addItem(soldItem);
-				}
+				model.getDetailedHistoryTableModel().populateWithData(item.getSoldGoods());
 
 			}
 		});
