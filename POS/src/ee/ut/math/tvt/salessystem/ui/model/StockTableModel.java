@@ -3,9 +3,12 @@ package ee.ut.math.tvt.salessystem.ui.model;
 import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 /**
  * Stock item table model.
@@ -41,23 +44,47 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	 * @param stockItem
 	 */
 	public void addItem(final StockItem stockItem) {
+		Session sess = HibernateUtil.currentSession();
+		
 		try {
-			StockItem item = getItemById(stockItem.getId());
-			item.setQuantity(item.getQuantity() + stockItem.getQuantity());
-			log.debug("Found existing item " + stockItem.getName()
+			
+			Transaction transaction = sess.beginTransaction();
+			
+			try {
+			
+				StockItem item = getItemById(stockItem.getId());
+				item.setQuantity(item.getQuantity() + stockItem.getQuantity());
+				log.debug("Found existing item " + stockItem.getName()
 					+ " increased quantity by " + stockItem.getQuantity());
-		} catch (NoSuchElementException e) {
-			rows.add(stockItem);
-			log.debug("Added " + stockItem.getName() + " quantity of "
-					+ stockItem.getQuantity());
+			
+			transaction.commit();
+			
+			
+			} catch (NoSuchElementException e) {
+			
+				rows.add(stockItem);
+				log.debug("Added " + stockItem.getName() + " quantity of "
+						+ stockItem.getQuantity());
+			
+				sess.save(stockItem);
+				transaction.commit();	
+			}
+		} finally {
+			HibernateUtil.closeSession();
 		}
 		fireTableDataChanged();
 	}
 
 	public void removeItem(final SoldItem soldItem) {
 		try {
+			Session sess = HibernateUtil.currentSession();
+			Transaction transaction = sess.beginTransaction();
+			
 			StockItem item = getItemById(soldItem.getId());
 			item.setQuantity(item.getQuantity() - soldItem.getQuantity());
+			
+			transaction.commit();
+			
 		} catch (NoSuchElementException e) {
 		}
 		fireTableDataChanged();

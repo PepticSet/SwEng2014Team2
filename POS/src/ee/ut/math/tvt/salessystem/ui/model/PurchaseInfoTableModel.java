@@ -1,10 +1,13 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.OutOfStockException;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 /**
  * Purchase history details model.
@@ -63,6 +66,9 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 * Add new StockItem to table.
 	 */
 	public void addItem(final SoldItem item) throws OutOfStockException {
+		Session sess = HibernateUtil.currentSession();
+		Transaction transaction = sess.beginTransaction();
+		
 		SoldItem existingItem = null;
 		for (SoldItem cartItem : rows) {
 			if (cartItem.getId() == item.getId()) {
@@ -88,6 +94,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 
 		log.debug("Added " + item.getName() + " quantity of "
 				+ item.getQuantity());
+		transaction.commit();
 		fireTableDataChanged();
 	}
 
