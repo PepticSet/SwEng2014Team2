@@ -29,9 +29,4 @@ public class DetailedHistoryTableModel extends SalesSystemTableModel<SoldItem> {
 		}
 		throw new IllegalArgumentException("Column index unsuitable");
 	}
-
-	public void addItem(final SoldItem item) {
-		rows.add(item);
-		fireTableDataChanged();
-	}
 }

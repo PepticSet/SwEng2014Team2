@@ -1,6 +1,10 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 
@@ -27,7 +31,14 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 	}
 
 	public void addItem(final HistoryItem item) {
+		Session sess = HibernateUtil.currentSession();
+		Transaction transaction = sess.beginTransaction();
+		
 		rows.add(item);
+		
+		sess.save(item);
+		transaction.commit();
+		
 		fireTableDataChanged();
 	}
 }
