@@ -104,6 +104,7 @@ public class AddToWarehouseDialog extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				okButton.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						okButtonClicked();
 
@@ -114,6 +115,7 @@ public class AddToWarehouseDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				buttonPane.add(cancelButton);
 				cancelButton.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}

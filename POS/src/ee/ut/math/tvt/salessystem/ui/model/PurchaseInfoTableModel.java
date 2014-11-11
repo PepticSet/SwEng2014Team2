@@ -16,7 +16,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			.getLogger(PurchaseInfoTableModel.class);
 
 	private StockTableModel warehouseTableModel;
-	
+
 	public PurchaseInfoTableModel(StockTableModel warehouseTableModel) {
 		super(new String[] { "Id", "Name", "Price", "Quantity", "Sum" });
 		this.warehouseTableModel = warehouseTableModel;
@@ -62,8 +62,7 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	/**
 	 * Add new StockItem to table.
 	 */
-	public void addItem(final SoldItem item)
-			throws OutOfStockException {
+	public void addItem(final SoldItem item) throws OutOfStockException {
 		SoldItem existingItem = null;
 		for (SoldItem cartItem : rows) {
 			if (cartItem.getId() == item.getId()) {
