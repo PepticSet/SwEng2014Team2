@@ -66,8 +66,8 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 * Add new StockItem to table.
 	 */
 	public void addItem(final SoldItem item) throws OutOfStockException {
-		Session sess = HibernateUtil.currentSession();
-		Transaction transaction = sess.beginTransaction();
+//		Session sess = HibernateUtil.currentSession();
+//		Transaction transaction = sess.beginTransaction();
 		
 		SoldItem existingItem = null;
 		for (SoldItem cartItem : rows) {
@@ -90,11 +90,12 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			existingItem.setQuantity(quantity);
 		} else {
 			rows.add(item);
+//			sess.save(item);
 		}
 
 		log.debug("Added " + item.getName() + " quantity of "
 				+ item.getQuantity());
-		transaction.commit();
+//		transaction.commit();
 		fireTableDataChanged();
 	}
 

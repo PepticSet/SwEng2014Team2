@@ -1,6 +1,11 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
+import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 public class DetailedHistoryTableModel extends SalesSystemTableModel<SoldItem> {
 
@@ -28,5 +33,18 @@ public class DetailedHistoryTableModel extends SalesSystemTableModel<SoldItem> {
 			return item.getSum();
 		}
 		throw new IllegalArgumentException("Column index unsuitable");
+	}
+	
+	//add to table and database
+	public void addItem(final SoldItem soldItem) {
+		Session sess = HibernateUtil.currentSession();
+		Transaction transaction = sess.beginTransaction();
+		
+		rows.add(soldItem);
+		
+		sess.save(soldItem);
+		transaction.commit();
+		
+		fireTableDataChanged();
 	}
 }

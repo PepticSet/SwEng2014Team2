@@ -41,6 +41,10 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	public HistoryItem(List<SoldItem> soldGoods) {
 		super();
 		this.soldGoods = soldGoods;
+		
+		for(SoldItem item : soldGoods) {
+			item.setHistoryItem(this);
+		}
 
 		this.price = getSum(soldGoods);
 

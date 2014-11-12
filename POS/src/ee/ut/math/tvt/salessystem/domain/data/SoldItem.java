@@ -31,7 +31,7 @@ public class SoldItem implements Cloneable, DisplayableItem {
 	@Column(name = "quantity")
 	private int quantity;
 
-	@Column(name = "price")
+	@Column(name = "itemprice")
 	private double price;
 	
 	
@@ -45,6 +45,14 @@ public class SoldItem implements Cloneable, DisplayableItem {
 		this.price = stockItem.getPrice();
 		this.quantity = quantity;
 		this.id = stockItem.getId();
+	}
+	
+	public SoldItem() {
+		
+	}
+
+	public void setHistoryItem(HistoryItem historyItem) {
+		this.historyItem = historyItem;
 	}
 
 	@Override

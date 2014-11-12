@@ -148,6 +148,9 @@ public class PaymentDialog extends JDialog {
 		// remove from stock
 		for (SoldItem row : purchaseTable) {
 			model.getWarehouseTableModel().removeItem(row);
+			
+			//add to detailedHistoryTableModel
+			model.getDetailedHistoryTableModel().addItem(row);
 		}
 
 		dispose();
