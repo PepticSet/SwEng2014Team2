@@ -100,7 +100,12 @@ public class PurchaseItemPanel extends JPanel {
 		barCodeField = new JTextField();
 		quantityField = new JTextField("1");
 		priceField = new JTextField();
-
+		addItemButton = new JButton("Add to cart");
+		
+		this.priceField.setEnabled(false);
+		this.barCodeField.setEnabled(false);
+		this.setEnabled(false);
+		
 		// Fill the dialog fields if the selected item in the JComboBox changes
 		nameField.addItemListener(new ItemListener() {
 			@Override
@@ -110,10 +115,7 @@ public class PurchaseItemPanel extends JPanel {
 				}
 			}
 		});
-
-		barCodeField.setEditable(false);
-		priceField.setEditable(false);
-
+		
 		// == Add components to the panel
 
 		// - name
@@ -133,7 +135,6 @@ public class PurchaseItemPanel extends JPanel {
 		panel.add(priceField);
 
 		// Create and add the button
-		addItemButton = new JButton("Add to cart");
 		addItemButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -156,6 +157,8 @@ public class PurchaseItemPanel extends JPanel {
 
 			barCodeField.setText(barCodeString);
 			priceField.setText(priceString);
+		} else {
+			reset();
 		}
 	}
 
@@ -206,8 +209,8 @@ public class PurchaseItemPanel extends JPanel {
 	 */
 	@Override
 	public void setEnabled(boolean enabled) {
+		this.nameField.setEnabled(enabled);
 		this.addItemButton.setEnabled(enabled);
-		this.barCodeField.setEnabled(enabled);
 		this.quantityField.setEnabled(enabled);
 	}
 
@@ -224,7 +227,6 @@ public class PurchaseItemPanel extends JPanel {
 		barCodeField.setText("");
 		quantityField.setText("1");
 		priceField.setText("");
-		fillDialogFields();
 	}
 
 	/*
