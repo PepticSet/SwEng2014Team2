@@ -206,5 +206,16 @@
 			</java>
 		</parallel>
 	</target>
+	
+	<target name="stopdb">
+	  <sql
+	    driver="org.hsqldb.jdbc.JDBCDriver"
+	    url="${db.url}"
+	    userid="sa" password=""
+	    autocommit="true">
+		<classpath refid="run.classpath"/>
+	  		SHUTDOWN
+	  </sql>
+	</target>
 
 </project>
