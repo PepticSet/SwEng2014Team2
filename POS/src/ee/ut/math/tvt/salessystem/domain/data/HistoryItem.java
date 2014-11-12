@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "timev")
 	private String time;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "HISTORYITEM_TO_SOLDITEMS",
 			joinColumns = @JoinColumn(name = "HISTORYITEM_ID",
 					referencedColumnName = "ID"),
@@ -53,6 +54,10 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		this.date = dateArray[2] + "." + dateArray[1] + "." + dateArray[0];
 		
 		this.time = timeF.format(calendar.getTime());
+	}
+	
+	public HistoryItem() {
+		
 	}
 
 	// helper
