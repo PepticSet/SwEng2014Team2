@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity(name = "HistoryItem")
@@ -24,18 +22,20 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "price")
 	private double price;
 	
-	@Column(name = "date")
+	@Column(name = "datev")
 	private String date;
 	
-	@Column(name = "time")
+	@Column(name = "timev")
 	private String time;
 
-	@OneToMany
-	@JoinTable(name = "HistoryItem_SoldGoods",
-			joinColumns = @JoinColumn(name = "HistoryItem_ID",
-					referencedColumnName = "ID"),
-			inverseJoinColumns = @JoinColumn(name = "SoldItem_ID",
-					referencedColumnName = "ID"))
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "HISTORYITEM_TO_SOLDITEMS",
+//			joinColumns = @JoinColumn(name = "HISTORYITEM_ID",
+//					referencedColumnName = "ID"),
+//			inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID",
+//					referencedColumnName = "ID"))
+	//@Transient
+	@OneToMany(mappedBy = "historyItem")
 	private List<SoldItem> soldGoods;
 
 	public HistoryItem(List<SoldItem> soldGoods) {
@@ -47,8 +47,16 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		SimpleDateFormat dateF = new SimpleDateFormat("dd.MM.yyyy");
 		SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
 		Calendar calendar = Calendar.getInstance();
-		this.date = dateF.format(calendar.getTime());
+		//reverse date for database
+		String date = dateF.format(calendar.getTime());
+		String[] dateArray = date.split("\\.");
+		this.date = dateArray[2] + "." + dateArray[1] + "." + dateArray[0];
+		
 		this.time = timeF.format(calendar.getTime());
+	}
+	
+	public HistoryItem() {
+		
 	}
 
 	// helper

@@ -33,6 +33,11 @@ public class SoldItem implements Cloneable, DisplayableItem {
 
 	@Column(name = "price")
 	private double price;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "HISTORYITEM_ID")
+	private HistoryItem historyItem;
 
 	public SoldItem(StockItem stockItem, int quantity) {
 		this.stockItem = stockItem;
