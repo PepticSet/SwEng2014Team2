@@ -1,13 +1,12 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.text.DecimalFormat;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.OutOfStockException;
-import ee.ut.math.tvt.salessystem.util.HibernateUtil;
 
 /**
  * Purchase history details model.
@@ -33,11 +32,11 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 		case 1:
 			return item.getName();
 		case 2:
-			return item.getPrice();
+			return (new DecimalFormat("0.00")).format(item.getPrice());
 		case 3:
 			return item.getQuantity();
 		case 4:
-			return item.getQuantity() * item.getPrice();
+			return (new DecimalFormat("0.00")).format(item.getQuantity() * item.getPrice());
 		}
 		throw new IllegalArgumentException("Column index out of range");
 	}
@@ -66,8 +65,8 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 	 * Add new StockItem to table.
 	 */
 	public void addItem(final SoldItem item) throws OutOfStockException {
-		Session sess = HibernateUtil.currentSession();
-		Transaction transaction = sess.beginTransaction();
+//		Session sess = HibernateUtil.currentSession();
+//		Transaction transaction = sess.beginTransaction();
 		
 		SoldItem existingItem = null;
 		for (SoldItem cartItem : rows) {
@@ -90,11 +89,12 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
 			existingItem.setQuantity(quantity);
 		} else {
 			rows.add(item);
+//			sess.save(item);
 		}
 
 		log.debug("Added " + item.getName() + " quantity of "
 				+ item.getQuantity());
-		transaction.commit();
+//		transaction.commit();
 		fireTableDataChanged();
 	}
 

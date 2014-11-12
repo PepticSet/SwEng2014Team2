@@ -12,7 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 import org.apache.log4j.Logger;
@@ -93,6 +95,11 @@ public class StockTab {
 		JPanel panel = new JPanel();
 
 		JTable table = new JTable(model.getWarehouseTableModel());
+		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 
 		JTableHeader header = table.getTableHeader();
 		header.setReorderingAllowed(false);

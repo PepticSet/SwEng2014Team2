@@ -1,6 +1,5 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -19,9 +18,6 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(name = "price")
-	private double price;
 	
 	@Column(name = "saleTime")
 	private Date saleTime;
@@ -39,23 +35,14 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	public HistoryItem(List<SoldItem> soldGoods) {
 		super();
 		this.soldGoods = soldGoods;
-		this.price = getSum(soldGoods);
+		for(SoldItem item : soldGoods) {
+			item.setHistoryItem(this);
+		}
 		this.saleTime = Calendar.getInstance().getTime();
 	}
 	
 	public HistoryItem() {
 		
-	}
-
-	// helper
-	private double getSum(List<SoldItem> soldGoods) {
-		double sum = 0;
-
-		for (SoldItem row : soldGoods) {
-			sum += row.getSum();
-		}
-
-		return sum;
 	}
 
 	@Override
@@ -68,7 +55,11 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	}
 
 	public double getPrice() {
-		return price;
+		double sum = 0;
+		for (SoldItem row : soldGoods) {
+			sum += row.getSum();
+		}
+		return sum;
 	}
 
 	public List<SoldItem> getSoldGoods() {

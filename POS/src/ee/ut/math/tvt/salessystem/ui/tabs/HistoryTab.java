@@ -12,10 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 import ee.ut.math.tvt.salessystem.domain.data.HistoryItem;
-import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 
 /**
@@ -59,6 +60,10 @@ public class HistoryTab {
 		JPanel panel = new JPanel();
 
 		JTable table = new JTable(model.getHistoryTableModel());
+		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
 
 		table.addMouseListener(new MouseListener() {
 
@@ -124,6 +129,12 @@ public class HistoryTab {
 		JPanel panel = new JPanel();
 
 		JTable table = new JTable(model.getDetailedHistoryTableModel());
+		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 
 		JTableHeader header = table.getTableHeader();
 		header.setReorderingAllowed(false);

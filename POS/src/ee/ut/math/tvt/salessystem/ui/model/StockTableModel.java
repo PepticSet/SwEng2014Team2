@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.text.DecimalFormat;
 import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
@@ -30,7 +31,7 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		case 1:
 			return item.getName();
 		case 2:
-			return item.getPrice();
+			return (new DecimalFormat("0.00")).format(item.getPrice());
 		case 3:
 			return item.getQuantity();
 		}

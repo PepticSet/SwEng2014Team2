@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import org.hibernate.Session;
@@ -27,7 +28,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 		case 1:
 			return (new SimpleDateFormat("HH:mm:ss")).format(item.getSaleTime());
 		case 2:
-			return item.getPrice();
+			return (new DecimalFormat("0.00")).format(item.getPrice());
 		}
 		throw new IllegalArgumentException("Column index unsuitable");
 	}
