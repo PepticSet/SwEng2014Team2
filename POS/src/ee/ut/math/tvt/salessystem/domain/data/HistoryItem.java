@@ -2,6 +2,7 @@ package ee.ut.math.tvt.salessystem.domain.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,11 +23,8 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "price")
 	private double price;
 	
-	@Column(name = "datev")
-	private String date;
-	
-	@Column(name = "timev")
-	private String time;
+	@Column(name = "saleTime")
+	private Date saleTime;
 
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@JoinTable(name = "HISTORYITEM_TO_SOLDITEMS",
@@ -41,18 +39,8 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	public HistoryItem(List<SoldItem> soldGoods) {
 		super();
 		this.soldGoods = soldGoods;
-
 		this.price = getSum(soldGoods);
-
-		SimpleDateFormat dateF = new SimpleDateFormat("dd.MM.yyyy");
-		SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
-		Calendar calendar = Calendar.getInstance();
-		//reverse date for database
-		String date = dateF.format(calendar.getTime());
-		String[] dateArray = date.split("\\.");
-		this.date = dateArray[2] + "." + dateArray[1] + "." + dateArray[0];
-		
-		this.time = timeF.format(calendar.getTime());
+		this.saleTime = Calendar.getInstance().getTime();
 	}
 	
 	public HistoryItem() {
@@ -75,12 +63,8 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		return id;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public String getTime() {
-		return time;
+	public Date getSaleTime() {
+		return saleTime;
 	}
 
 	public double getPrice() {

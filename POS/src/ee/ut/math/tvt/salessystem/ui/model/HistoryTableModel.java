@@ -1,5 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui.model;
 
+import java.text.SimpleDateFormat;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,9 +23,9 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 	protected Object getColumnValue(HistoryItem item, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return item.getDate();
+			return (new SimpleDateFormat("dd.MM.yyyy")).format(item.getSaleTime());
 		case 1:
-			return item.getTime();
+			return (new SimpleDateFormat("HH:mm:ss")).format(item.getSaleTime());
 		case 2:
 			return item.getPrice();
 		}
