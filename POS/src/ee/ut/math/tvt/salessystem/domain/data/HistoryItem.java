@@ -4,14 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity(name = "HistoryItem")
@@ -31,12 +28,14 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "timev")
 	private String time;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "HISTORYITEM_TO_SOLDITEMS",
-			joinColumns = @JoinColumn(name = "HISTORYITEM_ID",
-					referencedColumnName = "ID"),
-			inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID",
-					referencedColumnName = "ID"))
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "HISTORYITEM_TO_SOLDITEMS",
+//			joinColumns = @JoinColumn(name = "HISTORYITEM_ID",
+//					referencedColumnName = "ID"),
+//			inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID",
+//					referencedColumnName = "ID"))
+	//@Transient
+	@OneToMany(mappedBy = "historyItem")
 	private List<SoldItem> soldGoods;
 
 	public HistoryItem(List<SoldItem> soldGoods) {
