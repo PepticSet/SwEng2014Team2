@@ -52,9 +52,10 @@ public interface SalesDomainController {
      *            Goods that the buyer has chosen to buy.
      * @throws VerificationFailedException
      */
-    public void submitCurrentPurchase(List<SoldItem> goods, Client client)
-            throws VerificationFailedException;
+//    public void submitCurrentPurchase(List<SoldItem> goods, Client client)
+//            throws VerificationFailedException;
 
+    public void registerSale(Sale sale);
 
     public void setModel(SalesSystemModel model);
 

@@ -165,14 +165,21 @@ public class PurchaseTab {
 
             log.debug("Contents of the current basket:\n"
                     + model.getCurrentPurchaseTableModel());
-            domainController.submitCurrentPurchase(
-                    model.getCurrentPurchaseTableModel().getTableRows(),
-                    model.getSelectedClient());
+//            domainController.submitCurrentPurchase(
+//                    model.getCurrentPurchaseTableModel().getTableRows(),
+//                    model.getSelectedClient());
+            //
+            domainController.registerSale(model.getCurrentSale());
+            //
             endSale();
             model.getCurrentPurchaseTableModel().clear();
-        } catch (VerificationFailedException e1) {
-            log.error(e1.getMessage());
+        } catch (Exception e1) {
+        	log.error(e1.getMessage());
         }
+//        } catch (VerificationFailedException e1) {
+//            log.error(e1.getMessage());
+//        }
+          
     }
 
     public void cancelPaying() {

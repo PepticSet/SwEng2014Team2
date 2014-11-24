@@ -4,7 +4,11 @@ import ee.ut.math.tvt.salessystem.domain.data.Sale;
 import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 import ee.ut.math.tvt.salessystem.domain.exception.SalesSystemException;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -20,6 +24,8 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
     public PurchaseInfoTableModel() {
         super(new String[] { "Id", "Name", "Price", "Quantity", "Sum"});
     }
+    
+    private Set<SoldItem> rows;
 
 	public PurchaseInfoTableModel(SalesSystemModel model) {
 	    this();
@@ -129,12 +135,29 @@ public class PurchaseInfoTableModel extends SalesSystemTableModel<SoldItem> {
         return new PurchaseInfoTableModel();
     }
 
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SoldItem> getTableRows() {
+		return new ArrayList<SoldItem>(rows);
+	}
+
     /**
      * Replace the current contents of the table with the SoldItems of the given Sale.
      * (Used by the history details table in the HistoryTab).
      */
     public void showSale(Sale sale) {
-        this.rows = new ArrayList<SoldItem>(sale.getSoldItems());
+        this.rows = sale.getSoldItems();
         fireTableDataChanged();
     }
 

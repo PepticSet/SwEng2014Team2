@@ -1,20 +1,27 @@
 package ee.ut.math.tvt.salessystem.ui;
 
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
+
 import ee.ut.math.tvt.salessystem.domain.controller.SalesDomainController;
 import ee.ut.math.tvt.salessystem.ui.model.SalesSystemModel;
 import ee.ut.math.tvt.salessystem.ui.tabs.ClientTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.HistoryTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.PurchaseTab;
 import ee.ut.math.tvt.salessystem.ui.tabs.StockTab;
+
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -46,10 +53,10 @@ public class SalesSystemUI extends JFrame {
     domainController.setModel(model);
 
     // Create singleton instances of the tab classes
-    historyTab = new HistoryTab(model);
+    historyTab = new HistoryTab(model, domainController);
     stockTab = new StockTab(model, domainController);
     purchaseTab = new PurchaseTab(domainController, model, this);
-    clientTab = new ClientTab(model);
+    clientTab = new ClientTab(model, domainController);
 
     setTitle("Sales system");
 
@@ -80,8 +87,30 @@ public class SalesSystemUI extends JFrame {
   }
 
   private void drawWidgets() {
-    JTabbedPane tabbedPane = new JTabbedPane();
+    final JTabbedPane tabbedPane = new JTabbedPane();
 
+    final Component clientTabPane = clientTab.draw();
+    final Component historyTabPane = historyTab.draw();
+    final Component stockTabPane = stockTab.draw();
+    
+    // load latest info from database
+    tabbedPane.addChangeListener(new ChangeListener() {
+		
+		@Override
+		public void stateChanged(ChangeEvent arg0) {
+			if (tabbedPane.getSelectedComponent() == clientTabPane){
+				clientTab.refresh();
+			}
+			else if (tabbedPane.getSelectedComponent() == historyTabPane){
+				historyTab.refresh();
+			}
+			else if (tabbedPane.getSelectedComponent() == stockTabPane){
+				stockTab.refresh();
+			}
+			
+		}
+	});
+    
     tabbedPane.add("Point-of-sale", purchaseTab.draw());
     tabbedPane.add("Warehouse", stockTab.draw());
     tabbedPane.add("History", historyTab.draw());

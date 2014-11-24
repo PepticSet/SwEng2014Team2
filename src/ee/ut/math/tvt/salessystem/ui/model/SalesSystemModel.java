@@ -23,6 +23,8 @@ public class SalesSystemModel {
     private ClientTableModel clientTableModel;
 
     private Client selectedClient;
+    
+    private Sale currentSale;
 
     /**
      * Construct application model.
@@ -48,7 +50,15 @@ public class SalesSystemModel {
 
     }
 
-    public StockTableModel getWarehouseTableModel() {
+    public Sale getCurrentSale() {
+		return currentSale;
+	}
+
+	public void setCurrentSale(Sale currentSale) {
+		this.currentSale = currentSale;
+	}
+
+	public StockTableModel getWarehouseTableModel() {
         return warehouseTableModel;
     }
 
