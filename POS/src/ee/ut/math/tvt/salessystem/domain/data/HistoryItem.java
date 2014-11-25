@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.domain.data;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,13 +23,6 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	@Column(name = "saleTime")
 	private Date saleTime;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinTable(name = "HISTORYITEM_TO_SOLDITEMS",
-//			joinColumns = @JoinColumn(name = "HISTORYITEM_ID",
-//					referencedColumnName = "ID"),
-//			inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID",
-//					referencedColumnName = "ID"))
-	//@Transient
 	@OneToMany(mappedBy = "historyItem")
 	private List<SoldItem> soldGoods;
 
@@ -42,7 +36,14 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 	}
 	
 	public HistoryItem() {
-		
+		super();
+		this.soldGoods = new ArrayList<SoldItem>();
+		this.saleTime = Calendar.getInstance().getTime();
+	}
+	
+	public void addItem(SoldItem soldItem) {
+		soldItem.setHistoryItem(this);
+		soldGoods.add(soldItem);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class HistoryItem implements Cloneable, DisplayableItem {
 		return saleTime;
 	}
 
-	public double getPrice() {
+	public double getSum() {
 		double sum = 0;
 		for (SoldItem row : soldGoods) {
 			sum += row.getSum();

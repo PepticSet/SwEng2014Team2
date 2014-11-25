@@ -28,7 +28,7 @@ public class HistoryTableModel extends SalesSystemTableModel<HistoryItem> {
 		case 1:
 			return (new SimpleDateFormat("HH:mm:ss")).format(item.getSaleTime());
 		case 2:
-			return (new DecimalFormat("0.00")).format(item.getPrice());
+			return (new DecimalFormat("0.00")).format(item.getSum());
 		}
 		throw new IllegalArgumentException("Column index unsuitable");
 	}
