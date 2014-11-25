@@ -61,8 +61,12 @@
 		<fileset dir="${lib.dir}">
 			<include name="*.jar"/>
 		</fileset>
+		<fileset dir="${lib.hibernate.dir}">
+			<include name="*.jar"/>
+		</fileset>
 		<pathelement path="${build.classes.dir}/" />
 		<pathelement path="${build.test.dir}/" />
+		<pathelement location="${etc.dir}" />
 	</path>
 
 
@@ -231,6 +235,15 @@
 	
 	<target name="build-tests" depends="build" description="Build the system">
 		<mkdir dir="${build.test.dir}"/>
+		<copy todir="${build.test.dir}" file="application.properties" />
+		<copy todir="${build.test.dir}" file="version.properties" />
+		<copy todir="${build.test.dir}/etc">
+			<fileset dir="${etc.dir}" />
+		</copy>
+		<copy todir="${build.test.dir}/resources">
+			<fileset dir="${res.dir}" />
+		</copy>
+		
 		<javac
 	        srcdir="${test.dir}"
 	        destdir="${build.test.dir}"
@@ -253,8 +266,8 @@
 		<junit>
 			<classpath refid="test-classpath" />
 
-			<formatter type="brief" usefile="false" />
-			<batchtest>
+			<formatter type="xml" usefile="true" />
+			<batchtest todir="${build.test.dir}">
 				<fileset dir="${build.test.dir}" includes="**/*.class" />
 			</batchtest>
 		</junit>

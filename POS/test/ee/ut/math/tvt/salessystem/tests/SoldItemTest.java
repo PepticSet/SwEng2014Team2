@@ -9,28 +9,15 @@ import ee.ut.math.tvt.salessystem.domain.data.SoldItem;
 import ee.ut.math.tvt.salessystem.domain.data.StockItem;
 
 public class SoldItemTest {
-
+	
 	private static StockItem stockItem1;
-	private static long id;
-	private static String name;
-	private static double price;
-	private static String description;
-	private static int stockItemQuantity;
-
 	private static SoldItem soldItem1;
-	private static int soldItem1Quantity;
 	private static SoldItem soldItem2;
-
-	private static double eps = 1e-3;
+	private static int soldItem1Quantity;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		id = 5;
-		name = "testitem";
-		price = 29;
-		description = "a test item";
-		stockItemQuantity = 7;
-		stockItem1 = new StockItem(id, name, description, price, stockItemQuantity);
+		stockItem1 = new StockItem((long) 5, "testitem", "a test item", 29, 7);
 
 		soldItem1Quantity = 5;
 		soldItem1 = new SoldItem(stockItem1, soldItem1Quantity);
@@ -41,7 +28,7 @@ public class SoldItemTest {
 	@Test
 	public void testGetSum() {
 		double sum = soldItem1.getSum();
-		assertEquals(soldItem1Quantity * price, sum, 1e-5);
+		assertEquals(soldItem1Quantity * stockItem1.getPrice(), sum, 1e-5);
 	}
 
 	@Test
