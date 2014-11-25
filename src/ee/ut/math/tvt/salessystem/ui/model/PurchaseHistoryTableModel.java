@@ -55,17 +55,6 @@ public class PurchaseHistoryTableModel extends SalesSystemTableModel<Sale> {
 		return buffer.toString();
 	}
 
-	@Override
-	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<Sale> getTableRows() {

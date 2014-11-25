@@ -2,7 +2,6 @@ package ee.ut.math.tvt.salessystem.domain.data;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -44,6 +43,7 @@ public class Sale implements DisplayableItem {
     
     public Sale(Client client) {
     	this.client = client;
+    	this.soldItems = new HashSet<SoldItem>();
     }
 
     public Client getClient() {

@@ -44,20 +44,20 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 	 * same id, then existing item's quantity will be increased.
 	 * @param stockItem
 	 */
-//	public void addItem(final StockItem stockItem) {
-//		try {
-//			StockItem item = getItemById(stockItem.getId());
-//			item.setQuantity(item.getQuantity() + stockItem.getQuantity());
-//			log.debug("Found existing item " + stockItem.getName()
-//					+ " increased quantity by " + stockItem.getQuantity());
-//		}
-//		catch (NoSuchElementException e) {
-//			rows.add(stockItem);
-//			log.debug("Added " + stockItem.getName()
-//					+ " quantity of " + stockItem.getQuantity());
-//		}
-//		fireTableDataChanged();
-//	}
+	public void addItem(final StockItem stockItem) {
+		try {
+			StockItem item = getItemById(stockItem.getId());
+			item.setQuantity(item.getQuantity() + stockItem.getQuantity());
+			log.debug("Found existing item " + stockItem.getName()
+					+ " increased quantity by " + stockItem.getQuantity());
+		}
+		catch (NoSuchElementException e) {
+			rows.add(stockItem);
+			log.debug("Added " + stockItem.getName()
+					+ " quantity of " + stockItem.getQuantity());
+		}
+		fireTableDataChanged();
+	}
 	// is this really unused or is eclipse bs-ing me
 
 	
@@ -100,18 +100,6 @@ public class StockTableModel extends SalesSystemTableModel<StockItem> {
 		}
 
 		return buffer.toString();
-	}
-
-	@Override
-	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
